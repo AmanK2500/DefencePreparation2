@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+
+    tools:context=".Login_SetUp.Update_Status">
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+
+        android:id="@+id/status_input"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="40dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Share Your Feeling With other Defence Lover" />
+    </com.google.android.material.textfield.TextInputLayout
+        >
+
+    <Button
+        android:id="@+id/status_save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/status_input"
+        android:layout_alignRight="@+id/status_input"
+        android:layout_below="@+id/status_input"
+        android:layout_marginTop="37dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="SAVE CHANGES"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
