@@ -1,5 +1,12 @@
 package exam.defencepreparation.Login_SetUp;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -8,12 +15,6 @@ import exam.defencepreparation.R;
 import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
 import nl.psdcompany.duonavigationdrawer.views.DuoMenuView;
 import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
-
-import android.os.Bundle;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMenuClickListener {
     private MenuAdapter mMenuAdapter;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         goToFragment(new MainFragment(), false);
         mMenuAdapter.setViewSelected(0, true);
         setTitle(mTitles.get(0));
+
+
     }
 
     private void handleToolbar() {
@@ -98,7 +101,17 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
 
         // Navigate to the right fragment
         switch (position) {
-            default:
+
+            case 1:
+                Intent I = new Intent(this, My_Profile_setting.class);
+                this.startActivity(I);
+                break;
+            case 2:
+                Intent II = new Intent(this, Update_Status.class);
+                this.startActivity(II);
+                break;
+
+                default:
                 goToFragment(new MainFragment(), false);
                 break;
         }
