@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    android:background="#485563"
+    android:id="@+id/ll">
+
+    <LinearLayout
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+
+            android:background="#485563"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:id="@+id/bankcardId"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            >
+            <RelativeLayout
+                android:background="#f9f7f7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:scaleType="centerCrop"
+                    android:id="@+id/card_image"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="150dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/loadingpic"
+                    />
+
+                <TextView
+                    android:background="#ed5807"
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/card_image"
+                    android:layout_toEndOf="@+id/topic1"
+                    android:layout_toRightOf="@+id/topic1"
+                    android:text="Time"
+                    android:textColor="#fbfbfc"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_margin="3dp"
+                    android:id="@+id/tittle"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/card_image"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/pt_sans"
+                    android:letterSpacing="0.04"
+                    android:lineSpacingExtra="3dp"
+                    android:maxLines="3"
+                    android:text="the video series of history complete course"
+                    android:textColor="#123"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/topic1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10dp"
+                    android:text="Banking"/>
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</LinearLayout>

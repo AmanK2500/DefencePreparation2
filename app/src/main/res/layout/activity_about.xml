@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
+    android:background="@drawable/backgroundcolour"
+    tools:context="exam.defencepreparation.Static_GK.About">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="50"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/aman_pic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/flaglogo" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="15dp"
+        android:textColor="#fff"
+        android:text="Sare jahan se accha hindostan hamara"/>
+
+
+    <TextView
+        android:textColor="#ffffff"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:text="Jai Hind"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:textColor="#f99b04"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:text="Follow Us On :"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:id="@+id/whatsapp"
+            android:src="@drawable/whatsappimage"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:id="@+id/instagram"
+            android:src="@drawable/instagram"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:id="@+id/teligram"
+            android:src="@drawable/teli"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+
+
+    </LinearLayout>
+
+
+   <LinearLayout
+       android:layout_marginTop="40dp"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_weight="25"
+       android:orientation="horizontal">
+
+       <Button
+
+           android:elevation="5dp"
+           android:id="@+id/shareit"
+           android:layout_width="150dp"
+           android:layout_height="50dp"
+           android:layout_gravity="center"
+           android:text="Share"
+           android:padding="10dp"
+
+           android:background="#c823da20"
+           android:textColor="#ffffff"
+           android:textSize="20sp"
+           android:typeface="serif" />
+
+
+
+
+       <Button
+           android:elevation="5dp"
+           android:id="@+id/rate"
+           android:layout_width="150dp"
+           android:layout_height="50dp"
+           android:padding="10dp"
+           android:layout_gravity="center"
+           android:background="@color/armyred"
+           android:text="Rate"
+           android:layout_marginLeft="10dp"
+           android:textColor="#ffffff"
+           android:textSize="20sp" />
+
+   </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="25"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/darker_gray"
+        android:text="Developed by Aman kumar."/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/darker_gray"
+        android:text="Copyright © 2019. All Rights Reserved."/>
+
+</LinearLayout>
+
+</LinearLayout>

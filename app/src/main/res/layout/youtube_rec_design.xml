@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#485563"
+    android:layout_marginTop="3dp"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_gravity="center"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="3dp"
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+            android:layout_weight="9"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TextView"
+                android:textColor="#606264"
+                android:textSize="11sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:maxLines="5"
+                android:textStyle="bold"
+                android:text="Hello india"
+                android:textSize="15sp"
+                android:textColor="#2bc1ea"
+                android:id="@+id/tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/pt_sans"
+                android:letterSpacing="0.04"
+              />
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/topic1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="TextView"
+                android:textColor="#565b60"
+                android:textSize="14sp"
+                android:maxLines="3"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+            <ImageView
+                android:background="@drawable/newscreen"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:scaleType="centerCrop"
+                android:id="@+id/card_image"
+                android:layout_width="110dp"
+                android:layout_height="100dp"
+
+                />
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
