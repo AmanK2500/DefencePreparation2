@@ -11,9 +11,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import exam.defencepreparation.Login_SetUp.MainFragment;
 import exam.defencepreparation.R;
-import exam.defencepreparation.Static_GK.DashBoard;
-import exam.defencepreparation.Static_GK.DashBoard_Video;
 import exam.defencepreparation.Static_GK.Function;
 
 
@@ -32,8 +31,8 @@ public class Home extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        Intent intent = new Intent(Home.this, DashBoard_Video.class);
-        startActivity(intent);
+        //Intent intent = new Intent(Home.this, MainFragment.class);
+        //startActivity(intent);
 
         finish();
     }

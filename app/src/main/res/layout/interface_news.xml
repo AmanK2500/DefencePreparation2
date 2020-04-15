@@ -43,6 +43,18 @@
             android:layout_marginLeft="9dp"
             />
 
+        <TextView
+            android:text="view"
+            android:id="@+id/view"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="normal"
+            android:textColor="#485563"
+            android:textSize="12sp"
+            android:layout_marginLeft="9dp"
+            />
+
 
         <TextView
             android:padding="5dp"

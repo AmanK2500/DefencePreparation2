@@ -1,5 +1,7 @@
 package exam.defencepreparation.Quiz.Model;
 
+import com.google.firebase.auth.FirebaseUser;
+
 public class QuestionScore {
     private String Question_Score;
     private String User;
@@ -7,7 +9,7 @@ public class QuestionScore {
     private String CategoryId;
     private String CategoryName;
 
-    public QuestionScore() {
+    public QuestionScore(String format, FirebaseUser mCurrentUser, String score, String categoryId, String categoryName) {
     }
 
     public QuestionScore(String question_Score, String user, String score, String categoryId, String categoryName) {

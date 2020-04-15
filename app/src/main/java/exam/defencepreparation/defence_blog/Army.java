@@ -61,11 +61,11 @@ public class Army extends Fragment {
         dialog = new SpotsDialog(getActivity());
         dialog.show();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Army_blog");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Navy_blog");
         mDatabase.keepSynced(true);
         mRecyclerView=(RecyclerView)view.findViewById(R.id.rec_airforce);
 
-      //  LinearLayout layout=(LinearLayout)view.findViewById(R.id.linearLayout);
+        //  LinearLayout layout=(LinearLayout)view.findViewById(R.id.linearLayout);
         //read=(TextView)view.findViewById(R.id.completeText);
         mRecyclerView.hasFixedSize();
         LinearLayoutManager  mLayoutManger = new LinearLayoutManager(this.getActivity());
@@ -160,31 +160,23 @@ public class Army extends Fragment {
                 (NewsDetail.class , interface_news, Army.MyViewHolder.class,mDatabase) {
 
             @Override
-            protected void populateViewHolder(final Army.MyViewHolder viewHolder, final NewsDetail model, int position) {
-
-      // screen shot code  here
-
-           //     View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
+            protected void populateViewHolder(Army.MyViewHolder viewHolder, final NewsDetail model, int position) {
 
 
-                //
                 viewHolder.setTopic(model.getTopic());
                 viewHolder.setDetail(model.getDetail());
                 viewHolder.setDate(model.getDate());
                 viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
                 dialog.dismiss();
 
-
-
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String topic="";
                         String detail="";
-
                         String date="";
                         String image="";
-                        String link="Army_blog";
+                        String link="Navy_blog";
 
                         topic=model.getTopic();
                         detail=model.getDetail();
@@ -211,13 +203,9 @@ public class Army extends Fragment {
 
     }
 
-
-
-
-
     public static class MyViewHolder extends RecyclerView.ViewHolder
     {
-        Button share;
+
         TextView post_desc;
         View mView;
         public MyViewHolder(View itemView)
@@ -226,8 +214,6 @@ public class Army extends Fragment {
         {
             super(itemView);
             mView=itemView;
-
-            share=mView.findViewById(R.id.share);
 
         }
 

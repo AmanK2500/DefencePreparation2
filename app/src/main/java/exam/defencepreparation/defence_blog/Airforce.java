@@ -1,24 +1,29 @@
 package exam.defencepreparation.defence_blog;
 
 
+
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -28,9 +33,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import dmax.dialog.SpotsDialog;
 import exam.defencepreparation.R;
+import exam.defencepreparation.Rec_htmlView;
 import exam.defencepreparation.Recycler_View_Click;
 import exam.defencepreparation.news.NewsDetail;
+
 import static exam.defencepreparation.R.layout.interface_news;
+import static exam.defencepreparation.R.layout.youtube_rec_design;
 
 public class Airforce extends Fragment {
     AdView mAdView;
@@ -53,23 +61,30 @@ public class Airforce extends Fragment {
         dialog = new SpotsDialog(getActivity());
         dialog.show();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Airforce_blog");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Navy_blog");
         mDatabase.keepSynced(true);
         mRecyclerView=(RecyclerView)view.findViewById(R.id.rec_airforce);
 
-
+        //  LinearLayout layout=(LinearLayout)view.findViewById(R.id.linearLayout);
+        //read=(TextView)view.findViewById(R.id.completeText);
         mRecyclerView.hasFixedSize();
         LinearLayoutManager  mLayoutManger = new LinearLayoutManager(this.getActivity());
         mLayoutManger.setReverseLayout(true);
         mLayoutManger.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLayoutManger);
 
-        //banner ads code here////////////////////////////////////////////////////////////////////////////////////
+        //banner ads code here
 
 
         mAdView = (AdView) view.findViewById(R.id.adView);
+
+
+
         AdRequest adRequest1 = new AdRequest.Builder()
+                // .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                // Check the LogCat to get your test device ID
                 .build();
+
         mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
@@ -82,12 +97,12 @@ public class Airforce extends Fragment {
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-               // Toast.makeText(getActivity(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAdLeftApplication() {
-              //  Toast.makeText(getActivity(), "Ad left application!", Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(getActivity(), "Ad left application!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -100,7 +115,10 @@ public class Airforce extends Fragment {
 
 
         return view;
+
     }
+
+
     @Override
     public void onPause() {
         if (mAdView != null) {
@@ -123,7 +141,14 @@ public class Airforce extends Fragment {
             mAdView.destroy();
         }
         super.onDestroy();
+
+
+
+
+
     }
+
+
 
     @Override
     public void onStart() {
@@ -151,7 +176,7 @@ public class Airforce extends Fragment {
                         String detail="";
                         String date="";
                         String image="";
-                        String link="Airforce_blog";
+                        String link="Navy_blog";
 
                         topic=model.getTopic();
                         detail=model.getDetail();
@@ -226,5 +251,7 @@ public class Airforce extends Fragment {
 
 
     }
+
+
 }
 

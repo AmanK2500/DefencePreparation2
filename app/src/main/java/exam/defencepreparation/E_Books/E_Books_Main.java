@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import exam.defencepreparation.R;
 
 
-public class English_Section extends AppCompatActivity {
+public class E_Books_Main extends AppCompatActivity {
 
     TabLayout mtab;
     ViewPager mpage;

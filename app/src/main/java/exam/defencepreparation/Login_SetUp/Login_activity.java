@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import androidx.appcompat.app.AppCompatActivity;
 import exam.defencepreparation.R;
@@ -25,6 +26,7 @@ public class Login_activity extends AppCompatActivity {
     EditText email,password;
     FirebaseAuth auth;
     Button button, forget,signup;
+    private FirebaseUser mCurrentUser;
 
     private ProgressDialog loadingbar;
     private DatabaseReference mdatabase;
@@ -33,6 +35,7 @@ public class Login_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
         auth=FirebaseAuth.getInstance();
+
         mdatabase= FirebaseDatabase.getInstance().getReference().child("Users");
         email=(EditText)findViewById(R.id.email);
         password =(EditText)findViewById(R.id.password);

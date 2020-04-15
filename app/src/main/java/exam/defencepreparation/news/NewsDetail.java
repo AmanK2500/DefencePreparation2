@@ -54,4 +54,15 @@ public class NewsDetail {
     private String  topic;
     private String detail;
     private String image;
+
+    public String getView() {
+        return view;
+    }
+
+    public void setView(String view) {
+        this.view = view;
+    }
+
+    private String view;
+
 }

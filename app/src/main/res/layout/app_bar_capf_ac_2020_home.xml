@@ -5,21 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CAPF_AC_2020.Capf_ac_2020_home">
+   >
 
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#80000000"
+        android:layout_height="30dp"
+        android:background="#123"
         android:theme="@android:style/Theme.NoTitleBar">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/PopupOverlay" />
+            app:popupTheme="@style/Theme.Design.NoActionBar" />
 
     </com.google.android.material.appbar.AppBarLayout>
     <include layout="@layout/content_capf_ac_2020_home" />

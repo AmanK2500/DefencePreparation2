@@ -2,7 +2,7 @@ package exam.defencepreparation.Quiz.Model;
 
 public class User {
 
-    private String userName;
+    private String name;
     private String password;
     private String email;
 
@@ -10,17 +10,17 @@ public class User {
     }
 
     public User(String userName, String password, String email) {
-        this.userName = userName;
+        this.name = userName;
         this.password = password;
         this.email = email;
     }
 
     public String getUserName() {
-        return userName;
+        return name;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.name = userName;
     }
 
     public String getPassword() {

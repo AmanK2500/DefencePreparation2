@@ -132,8 +132,6 @@ public class Airforce extends Fragment {
     public void onStart() {
         super.onStart();
         //progressBar.setVisibility(VISIBLE);
-
-
         FirebaseRecyclerAdapter<NewsDetail, Airforce.MyViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<NewsDetail, Airforce.MyViewHolder>
                 (NewsDetail.class , youtube_rec_design, Airforce.MyViewHolder.class,mDatabase) {
 

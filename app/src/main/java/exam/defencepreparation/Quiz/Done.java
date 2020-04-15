@@ -11,10 +11,14 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
+import exam.defencepreparation.Quiz.Common.Common;
+import exam.defencepreparation.Quiz.Model.QuestionScore;
 import exam.defencepreparation.R;
 
 public class Done extends AppCompatActivity {
@@ -23,9 +27,12 @@ public class Done extends AppCompatActivity {
     TextView txtResultScore,getTxtResultQuestion,total,fail;
     ProgressBar progressBar;
     AdView mAdView;
+    private DatabaseReference mUserDatabase;
     FirebaseDatabase database;
     DatabaseReference question_score;
     InterstitialAd mInterstitialAd;
+    private FirebaseUser mCurrentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +41,12 @@ public class Done extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         question_score = database.getReference("Question_Score");
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String current_uid = mCurrentUser.getUid();
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
 
 
+        total = findViewById(R.id.total);
         txtResultScore = findViewById(R.id.txtTotalScore);
         fail =  findViewById(R.id.fail);
 
@@ -59,19 +70,19 @@ public class Done extends AppCompatActivity {
 
             txtResultScore.setText(String.format(" %d",score));
             getTxtResultQuestion.setText(String.format(" %d",correctAnswer));
-           // total.setText(String.format("%d",totalQuestion));
+            total.setText(String.format("%d",totalQuestion));
             int cal = totalQuestion - correctAnswer;
             fail.setText(String.format("%d",cal));
 
             progressBar.setMax(totalQuestion);
             progressBar.setProgress(correctAnswer);
 
-           /* question_score.child(String.format("%s_%s", Common.currentUser.getUserName(),Common.categoryId))
-                    .setValue(new QuestionScore(String.format("%s_%s", Common.currentUser.getUserName(),Common.categoryId),
-                            Common.currentUser.getUserName(),
+            question_score.child(String.format("name", mCurrentUser,Common.categoryId))
+                    .setValue(new QuestionScore(String.format("name", mCurrentUser,Common.categoryId),
+                            mCurrentUser,
                             String.valueOf(score),
                             Common.categoryId,
-                            Common.categoryName));  */
+                            Common.categoryName));
         }
 
 
