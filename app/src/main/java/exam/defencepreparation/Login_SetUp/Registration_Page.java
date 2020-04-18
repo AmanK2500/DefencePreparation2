@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdView;
@@ -32,7 +34,8 @@ public class Registration_Page extends AppCompatActivity {
     private EditText mDisplayName;
     private EditText mEmail;
     private EditText mPassword;
-    private Button mCreateBtn;
+    private ImageView mCreateBtn;
+    private TextView LoginPage;
     private Toolbar mToolbar;
     private DatabaseReference mDatabase;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -54,10 +57,18 @@ public class Registration_Page extends AppCompatActivity {
 
         // Android Fields
 
+        LoginPage = (TextView) findViewById(R.id.loginpage);
+        LoginPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Registration_Page.this, Login_activity.class);
+                startActivity(intent);
+            }
+        });
         mDisplayName = (EditText) findViewById(R.id.name);
         mEmail = (EditText) findViewById(R.id.email);
         mPassword = (EditText) findViewById(R.id.password);
-        mCreateBtn = (Button) findViewById(R.id.reg_create_btn);
+        mCreateBtn = (ImageView) findViewById(R.id.reg_create_btn);
 
 
         mCreateBtn.setOnClickListener(new View.OnClickListener() {

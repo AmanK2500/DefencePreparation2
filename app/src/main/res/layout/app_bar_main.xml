@@ -12,7 +12,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/bgheader"
+        android:background="#00A1A4"
         android:theme="@android:style/Theme.NoTitleBar">
 
         <androidx.appcompat.widget.Toolbar

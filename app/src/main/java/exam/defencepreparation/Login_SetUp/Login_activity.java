@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,7 +27,9 @@ import io.reactivex.annotations.NonNull;
 public class Login_activity extends AppCompatActivity {
     EditText email,password;
     FirebaseAuth auth;
-    Button button, forget,signup;
+    Button button, forget;
+    ImageView loginimageView;
+    TextView forget1,signup;
     private FirebaseUser mCurrentUser;
 
     private ProgressDialog loadingbar;
@@ -39,14 +43,14 @@ public class Login_activity extends AppCompatActivity {
         mdatabase= FirebaseDatabase.getInstance().getReference().child("Users");
         email=(EditText)findViewById(R.id.email);
         password =(EditText)findViewById(R.id.password);
-        button=(Button)findViewById(R.id.login);
-        forget=(Button)findViewById(R.id.forget);
-        signup=(Button)findViewById(R.id.signup);
+        loginimageView=(ImageView) findViewById(R.id.login);
+        forget1=(TextView)findViewById(R.id.forget);
+        signup=(TextView) findViewById(R.id.signup);
 
 
         loadingbar = new ProgressDialog(this);
 
-        forget.setOnClickListener(new View.OnClickListener() {
+        forget1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -65,7 +69,7 @@ public class Login_activity extends AppCompatActivity {
         });
 
 
-        button.setOnClickListener(new View.OnClickListener() {
+        loginimageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String emailAddress= email.getText().toString();

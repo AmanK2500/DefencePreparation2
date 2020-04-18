@@ -25,15 +25,15 @@
         android:layout_height="71dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="26dp"
-        android:src="@drawable/user123"
+        android:src="@drawable/defencelogocrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="16dp" />
 
     <TextView
         android:id="@+id/nameuser"
-        android:layout_width="108dp"
-        android:layout_height="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="32dp"
         android:text="Student"
@@ -90,14 +90,15 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/bankcardId"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="#fff"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:background="#fff"
@@ -117,7 +118,7 @@
                         android:text="Daily Updates"
                         android:gravity="center"
                         android:textColor="#172646"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"  />
 
                 </LinearLayout>
 
@@ -297,12 +298,10 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/previous_year"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -334,7 +333,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/e_books"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -368,7 +367,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/quiz"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
