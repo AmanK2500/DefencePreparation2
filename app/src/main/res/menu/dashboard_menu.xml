@@ -4,25 +4,36 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/user123"
-            android:title="Dashboard" />
-        <item
-            android:id="@+id/profile"
-            android:title="Profile"
-            android:icon="@drawable/profile_icon"/>
-        <item
-            android:id="@+id/user"
-            android:icon="@drawable/otheraspirants"
-            android:title="Other Aspirants" />
-        <item
-            android:id="@+id/jobs"
-            android:icon="@drawable/job"
-            android:title="Sarkari Naukri" />
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/homeicon"
+        android:title="Dashboard" />
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/profile_icon"/>
+    <item
+        android:id="@+id/user"
+        android:icon="@drawable/otheraspirants"
+        android:title="Other Aspirants" />
+    <item
+        android:id="@+id/jobs"
+        android:icon="@drawable/job"
+        android:title="Sarkari Naukri" />
 
+</group>
 
-        
+    <group android:id="@+id/group_settings_id">
+        <item android:title="Connect with Us!"/>
+        <item
+            android:id="@+id/AboutUs"
+            android:icon="@drawable/aboutusnew"
+            android:title="About Us" />
+        <item
+            android:id="@+id/InstagramPage"
+            android:icon="@drawable/instaicon"
+            android:title="Instagram Page" />
+
     </group>
 
 

@@ -51,8 +51,8 @@ public class My_Profile_setting extends AppCompatActivity {
     private CircleImageView mDisplayImage;
     private TextView mName;
     private TextView mStatus;
-    private Button mStatusBtn;
-    private Button mImageBtn;
+    private TextView mStatusBtn;
+    private TextView mImageBtn;
     private static final int GALLERY_PICK = 1;
     private StorageReference mImageStorage;
     private ProgressDialog mProgressDialog;
@@ -60,14 +60,14 @@ public class My_Profile_setting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my__profile_setting);
+        setContentView(R.layout.profilecheck);
 
         mDisplayImage = (CircleImageView) findViewById(R.id.settings_image);
         mName = (TextView) findViewById(R.id.settings_name);
         mStatus = (TextView) findViewById(R.id.settings_status);
 
-        mStatusBtn = (Button) findViewById(R.id.settings_status_btn);
-        mImageBtn = (Button) findViewById(R.id.settings_image_btn);
+        mStatusBtn = (TextView) findViewById(R.id.settings_status_btn);
+        mImageBtn = (TextView) findViewById(R.id.settings_image_btn);
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();

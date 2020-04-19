@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00BCD4"
     android:orientation="vertical"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
 
@@ -25,6 +26,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000"
             android:hint="Share Your Feeling With other Defence Lover" />
     </com.google.android.material.textfield.TextInputLayout
         >
@@ -33,11 +35,12 @@
         android:id="@+id/status_save_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_alignEnd="@+id/status_input"
         android:layout_alignRight="@+id/status_input"
         android:layout_below="@+id/status_input"
         android:layout_marginTop="37dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:text="SAVE CHANGES"
         android:textColor="@android:color/white" />
 

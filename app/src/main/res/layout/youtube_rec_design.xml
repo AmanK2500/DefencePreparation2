@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#485563"
-    android:layout_marginTop="3dp"
     android:orientation="vertical">
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
@@ -13,8 +12,8 @@
         android:layout_height="130dp"
         android:layout_gravity="center"
         app:cardElevation="4dp"
-        app:cardCornerRadius="8dp"
-        android:layout_margin="3dp"
+        app:cardCornerRadius="0dp"
+        android:layout_margin="2dp"
         >
         <LinearLayout
             android:orientation="horizontal"

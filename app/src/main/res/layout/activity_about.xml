@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100"
-    android:background="@drawable/backgroundcolour"
+    android:background="#00BCD4"
     tools:context="exam.defencepreparation.Static_GK.About">
 
 
@@ -23,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/aman_pic"
             android:layout_width="150dp"
             android:layout_height="150dp"
@@ -31,7 +29,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
-            android:src="@drawable/flaglogo" />
+            android:src="@drawable/defencelogofull" />
 
     </RelativeLayout>
 
@@ -40,7 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="15dp"
+        android:gravity="center"
+        android:textSize="25dp"
         android:textColor="#fff"
         android:text="Sare jahan se accha hindostan hamara"/>
 
@@ -58,7 +57,7 @@
     </LinearLayout>
 
     <TextView
-        android:textColor="#f99b04"
+        android:textColor="#151514"
         android:layout_gravity="center"
         android:textSize="18sp"
         android:text="Follow Us On :"
@@ -84,7 +83,7 @@
         <ImageView
             android:layout_margin="10dp"
             android:id="@+id/instagram"
-            android:src="@drawable/instagram"
+            android:src="@drawable/instaicon"
             android:layout_width="50dp"
             android:layout_height="50dp" />
 
@@ -117,8 +116,7 @@
            android:layout_gravity="center"
            android:text="Share"
            android:padding="10dp"
-
-           android:background="#c823da20"
+           android:background="@color/colorAccent"
            android:textColor="#ffffff"
            android:textSize="20sp"
            android:typeface="serif" />
@@ -133,7 +131,7 @@
            android:layout_height="50dp"
            android:padding="10dp"
            android:layout_gravity="center"
-           android:background="@color/armyred"
+           android:background="@color/colorAccent"
            android:text="Rate"
            android:layout_marginLeft="10dp"
            android:textColor="#ffffff"

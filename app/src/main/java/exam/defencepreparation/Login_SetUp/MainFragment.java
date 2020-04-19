@@ -93,12 +93,9 @@ public class MainFragment extends Fragment {
 
         auth=FirebaseAuth.getInstance();
 
-
-
         mDisplayImage=(CircleImageView)view.findViewById(R.id.imageView2);
         mName=(TextView) view.findViewById(R.id.nameuser);
         AdRequest adsRequest = new AdRequest.Builder().build();
-
 
         // recyclerview code----------------
         mDatabase = FirebaseDatabase.getInstance().getReference("National_news");
