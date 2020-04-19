@@ -47,12 +47,11 @@ public class My_Profile_setting extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private Bitmap compressedImageFile;
     private Uri mainImageURI = null;
-    FirebaseAuth firebaseAuth;
 
     private CircleImageView mDisplayImage;
     private TextView mName;
     private TextView mStatus;
-    private Button mStatusBtn,signout;
+    private Button mStatusBtn;
     private Button mImageBtn;
     private static final int GALLERY_PICK = 1;
     private StorageReference mImageStorage;
@@ -69,24 +68,10 @@ public class My_Profile_setting extends AppCompatActivity {
 
         mStatusBtn = (Button) findViewById(R.id.settings_status_btn);
         mImageBtn = (Button) findViewById(R.id.settings_image_btn);
-        signout = (Button) findViewById(R.id.signout);
-
-        signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                firebaseAuth.getInstance().signOut();
-                Intent status_intent = new Intent(My_Profile_setting.this, Login_activity.class);
-                startActivity(status_intent);
-            }
-        });
 
         mImageStorage = FirebaseStorage.getInstance().getReference();
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = mCurrentUser.getUid();
-        String current_email = mCurrentUser.getEmail();
-        signout.setText(current_email);
-
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
         mUserDatabase.keepSynced(true);
         mUserDatabase.addValueEventListener(new ValueEventListener() {

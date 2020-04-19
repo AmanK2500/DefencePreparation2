@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,8 +20,8 @@ import io.reactivex.annotations.NonNull;
 public class Reset_Password extends AppCompatActivity {
 
     private EditText edtEmail;
-    private Button btnResetPassword;
-    private Button btnBack;
+    private ImageView btnResetPassword;
+    private TextView btnBack;
     private FirebaseAuth mAuth;
 
     @Override
@@ -28,8 +30,8 @@ public class Reset_Password extends AppCompatActivity {
         setContentView(R.layout.activity_reset__password);
 
         edtEmail = (EditText) findViewById(R.id.edt_reset_email);
-        btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
-        btnBack = (Button) findViewById(R.id.btn_back);
+        btnResetPassword = (ImageView) findViewById(R.id.btn_reset_password);
+        btnBack = (TextView) findViewById(R.id.btn_back);
 
         mAuth = FirebaseAuth.getInstance();
 
