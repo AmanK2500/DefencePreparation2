@@ -7,11 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdListener;
@@ -30,6 +32,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,7 +51,9 @@ import exam.defencepreparation.news.Airforce;
 import exam.defencepreparation.news.NewsDetail;
 import exam.defencepreparation.news.News_Daily;
 
+import static exam.defencepreparation.R.layout.custompopup;
 import static exam.defencepreparation.R.layout.rec_horigental_design;
+import static exam.defencepreparation.R.layout.trydashboard;
 import static exam.defencepreparation.R.layout.youtube_rec_design;
 
 
@@ -61,10 +66,11 @@ public class MainFragment extends Fragment {
     private FirebaseUser mCurrentUser;
     private StorageReference mImageStorage;
     private Uri mainImageURI = null;
-    private RecyclerView mRecyclerView;
-    private DatabaseReference mDatabase;
+    private RecyclerView mRecyclerView,nRecyclerView;
+    private DatabaseReference mDatabase,nDatabase;
     private CircleImageView mDisplayImage;
     private TextView mName;
+    FirebaseAuth auth;
 
     CardView mycard1, mycard2, mycard3, mycard4, mycard5, mycard6,mycard7,mycard8;
     Intent i, ii, iii, iiii, iiiii, VI,VII,VIII;
@@ -85,6 +91,8 @@ public class MainFragment extends Fragment {
         mycard8 = (CardView) view.findViewById(R.id.quiz);
         mAdView = (AdView)view.findViewById(R.id.adView);
 
+        auth=FirebaseAuth.getInstance();
+
 
 
         mDisplayImage=(CircleImageView)view.findViewById(R.id.imageView2);
@@ -104,80 +112,27 @@ public class MainFragment extends Fragment {
 
 
 
+        // code for recyclerview two
+
+        nDatabase = FirebaseDatabase.getInstance().getReference("National_news");
+        nDatabase.keepSynced(true);
+        nRecyclerView=(RecyclerView)view.findViewById(R.id.front_page_recycler_view2);
+        nRecyclerView.hasFixedSize();
+        LinearLayoutManager nLayoutManger = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,true);
+        mLayoutManger.setReverseLayout(true);
+        nLayoutManger.setStackFromEnd(true);
+        nRecyclerView.setLayoutManager(nLayoutManger);
+
 
 
         i = new Intent(getActivity(), News_Daily.class);
         ii = new Intent(getActivity(), Defence_Blog.class);
         iii = new Intent(getActivity(), SSB_Final.class);
         iiii = new Intent(getActivity(), Capf_ac_2020_home.class);
-
-
-        mycard1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(i);
-            }
-        });
-        mycard2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(ii);
-            }
-        });
-        mycard3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(iii);
-            }
-        });
-        mycard4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(iiii);
-            }
-        });
-        mycard5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(iiiii);
-            }
-        });
-        mycard6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(VI);
-            }
-        });
-        mycard7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(VII);
-            }
-        });
-        mycard8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(VIII);
-            }
-        });
-
-
-
-
         iiiii= new Intent(getActivity(), YouTube_general.class);
         VI = new Intent(getActivity(), English_Section.class);
         VII = new Intent(getActivity(), E_Books_Main.class);
         VIII = new Intent(getActivity(), Home.class);
-
-
-
-
-
-
-        // ads coding
-
-
-
 
         mAdView.setAdListener(new AdListener() {
             @Override
@@ -204,64 +159,11 @@ public class MainFragment extends Fragment {
                 super.onAdOpened();
             }
         });
-
         mAdView.loadAd(adsRequest);
-
-
-        // fetching name and pic of the particular user
-
-
-        mImageStorage = FirebaseStorage.getInstance().getReference();
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-
-        String current_uid = mCurrentUser.getUid();
-        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
-        mUserDatabase.keepSynced(true);
-        mUserDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                String name = dataSnapshot.child("name").getValue().toString();
-                final String image = dataSnapshot.child("image").getValue().toString();
-                String status = dataSnapshot.child("status").getValue().toString();
-                String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
-                mainImageURI = Uri.parse(image);
-                mName.setText(name);
-               // mStatus.setText(status);
-                if(!image.equals("default")) {
-                    Picasso.with(getActivity()).load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.defence_logo_crop).into(mDisplayImage, new Callback() {
-                        @Override
-                        public void onSuccess() {
-
-                        }
-                        @Override
-                        public void onError() {
-
-                            Picasso.with(getActivity()).load(image).placeholder(R.drawable.defence_logo_crop).into(mDisplayImage);
-
-                        }
-                    });
-
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-
         return view;
+
     }
     // banner ads
-
 
     @Override
     public void onPause() {
@@ -290,8 +192,123 @@ public class MainFragment extends Fragment {
     public void onStart() {
         super.onStart();
         //progressBar.setVisibility(VISIBLE);
-        FirebaseRecyclerAdapter<NewsDetail, MainFragment.MyViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<NewsDetail, MainFragment.MyViewHolder>
-                (NewsDetail.class , rec_horigental_design, MainFragment.MyViewHolder.class,mDatabase) {
+
+         mCurrentUser = auth.getCurrentUser();
+        if(mCurrentUser == null) {
+            mName.setText("Defence Aspirant");
+            mDisplayImage.setImageResource(R.drawable.user123);
+
+            mycard1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(i);
+                }
+            });
+            mycard2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(ii);
+                }
+            });
+            mycard3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(iii);
+                }
+            });
+            mycard4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(iiii);
+                }
+            });
+
+            mycard5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showFilterPopup(v);
+                }
+            });
+            mycard6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showFilterPopup(v);
+                }
+            });
+            mycard7.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showFilterPopup(v);
+                }
+            });
+            mycard8.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showFilterPopup(v);
+                }
+            });
+        }
+
+
+
+         else {
+            //if user login  then can access all cards - data
+            mycard1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(i);
+                }
+            });
+            mycard2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(ii);
+                }
+            });
+            mycard3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(iii);
+                }
+            });
+            mycard4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(iiii);
+                }
+            });
+            mycard5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(iiiii);
+                }
+            });
+            mycard6.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(VI);
+                }
+            });
+            mycard7.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(VII);
+                }
+            });
+            mycard8.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(VIII);
+                }
+            });
+
+
+            sendToStart();
+        }
+
+        // recyclerview code
+        super.onStart();
+    FirebaseRecyclerAdapter<NewsDetail, MainFragment.MyViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<NewsDetail, MainFragment.MyViewHolder>(NewsDetail.class , rec_horigental_design, MainFragment.MyViewHolder.class,mDatabase) {
 
             @Override
             protected void populateViewHolder(MainFragment.MyViewHolder viewHolder, final NewsDetail model, int position) {
@@ -334,6 +351,109 @@ public class MainFragment extends Fragment {
         };
         firebaseRecyclerAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+
+        // recyclerview two code data fetch
+
+
+        // recyclerview code
+        super.onStart();
+        FirebaseRecyclerAdapter<NewsDetail, MainFragment.MyViewHolder> firebaseRecyclerAdapter2=new FirebaseRecyclerAdapter<NewsDetail,
+                MainFragment.MyViewHolder>(NewsDetail.class , rec_horigental_design, MainFragment.MyViewHolder.class,nDatabase) {
+
+            @Override
+            protected void populateViewHolder(MainFragment.MyViewHolder viewHolder, final NewsDetail model, int position) {
+
+
+                viewHolder.setTopic(model.getTopic());
+                viewHolder.setDetail(model.getDetail());
+                viewHolder.setDate(model.getDate());
+                viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
+
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String topic="";
+                        String detail="";
+                        String date="";
+                        String image="";
+                        String link="National_news";
+
+                        topic=model.getTopic();
+                        detail=model.getDetail();
+                        date=model.getDate();
+                        image=model.getImage();
+
+
+                        Intent imgFullScrn = new Intent(getActivity(), Rec_htmlView.class);
+                        imgFullScrn.putExtra("topic",topic);
+                        imgFullScrn.putExtra("detail",detail);
+                        imgFullScrn.putExtra("date",date);
+                        imgFullScrn.putExtra("image",image);
+                        imgFullScrn.putExtra("datalink",link);
+
+
+                        startActivity(imgFullScrn);
+                    }
+                });
+
+            }
+        };
+        firebaseRecyclerAdapter2.notifyDataSetChanged();
+        nRecyclerView.setAdapter(firebaseRecyclerAdapter2);
+
+
+
+    }
+
+    private void sendToStart() {
+
+
+        String current_uid = mCurrentUser.getUid();
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
+        mUserDatabase.keepSynced(true);
+        mUserDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String name = dataSnapshot.child("name").getValue().toString();
+                final String image = dataSnapshot.child("image").getValue().toString();
+                String status = dataSnapshot.child("status").getValue().toString();
+                String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
+                mainImageURI = Uri.parse(image);
+                mName.setText(name);
+                // mStatus.setText(status);
+                if(!image.equals("default")) {
+                    Picasso.with(getActivity()).load(image).networkPolicy(NetworkPolicy.OFFLINE)
+                            .placeholder(R.drawable.defence_logo_crop).into(mDisplayImage, new Callback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+                        @Override
+                        public void onError() {
+
+                            Picasso.with(getActivity()).load(image).placeholder(R.drawable.defence_logo_crop).into(mDisplayImage);
+
+                        }
+                    });
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+
 
     }
 
@@ -383,6 +503,35 @@ public class MainFragment extends Fragment {
         }
 
 
+    }
+
+    // pop up menu for login request
+
+    // Display anchored popup menu based on view selected
+    private void showFilterPopup(View v) {
+        PopupMenu popup = new PopupMenu(getActivity(), v);
+        // Inflate the menu from xml
+        popup.inflate(R.menu.popup_filters);
+        popup.setGravity(custompopup);
+
+        // Setup menu item selection
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_keyword:
+                        Toast.makeText(getActivity(), "Login !", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.menu_popularity:
+                        Toast.makeText(getActivity(), "Sign Up!", Toast.LENGTH_SHORT).show();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        // Handle dismissal with: popup.setOnDismissListener(...);
+        // Show the menu
+        popup.show();
     }
 }
 

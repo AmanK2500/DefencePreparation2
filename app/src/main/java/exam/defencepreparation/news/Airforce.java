@@ -18,6 +18,8 @@ import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
@@ -38,7 +40,8 @@ import static exam.defencepreparation.R.layout.youtube_rec_design;
 public class Airforce extends Fragment {
     AdView mAdView;
     private RecyclerView mRecyclerView;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,mviewdatabase;
+    private FirebaseUser mCurrentUser;
     TextView read;
     AlertDialog dialog;
 
@@ -55,6 +58,11 @@ public class Airforce extends Fragment {
 
         dialog = new SpotsDialog(getActivity());
         dialog.show();
+
+        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String current_uid = mCurrentUser.getUid();
+
+        mviewdatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("MCQ");
         mDatabase.keepSynced(true);

@@ -71,20 +71,9 @@
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:src="@drawable/whatsappimage" />
-                        <ImageView
-                            android:layout_weight="1"
-                            android:id="@+id/btn"
-                            android:layout_marginRight="5dp"
-                            android:layout_width="40dp"
-                            android:layout_height="60dp"
-                            android:src="@drawable/pdflogo" />
-
-
-
-
                     </LinearLayout>
 
-                    <TextView
+                    <org.sufficientlysecure.htmltextview.HtmlTextView
                         android:layout_marginTop="7dp"
                         android:layout_marginLeft="10dp"
                         android:text="Hello aman kumar"

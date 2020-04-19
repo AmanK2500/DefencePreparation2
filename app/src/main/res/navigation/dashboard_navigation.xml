@@ -15,8 +15,8 @@
         tools:layout="@layout/activity_my__profile_setting" />
     <fragment
         android:id="@+id/user"
-        android:name="exam.defencepreparation.Login_SetUp.Update_Status"
-        tools:layout="@layout/activity_update__status" />
+        android:name="exam.defencepreparation.Login_SetUp.All_User_List"
+        tools:layout="@layout/fragment_airforce" />
     <fragment
         android:id="@+id/jobs"
         android:name="exam.defencepreparation.Login_SetUp.MainFragment"

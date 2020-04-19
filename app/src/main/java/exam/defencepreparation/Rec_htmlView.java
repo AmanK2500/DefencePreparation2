@@ -34,6 +34,9 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
+import org.sufficientlysecure.htmltextview.HtmlTextView;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -56,6 +59,7 @@ public class Rec_htmlView  extends AppCompatActivity implements View.OnClickList
     private RecyclerView mRecyclerView;
     private DatabaseReference mDatabase;
     ImageView share;
+    HtmlTextView htmlTextView;
     private LinearLayout rootContent;
     TextView app_name;
     ImageView imageView;
@@ -81,17 +85,12 @@ public class Rec_htmlView  extends AppCompatActivity implements View.OnClickList
         image= extras.getString("image");
         databaseID=extras.getString("datalink");
         imageView=(ImageView)findViewById(R.id.share);
-        btn=findViewById(R.id.btn);
+
 
 
         post_image=(KenBurnsView) findViewById(R.id.pic);
 
-          btn.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  createPdf();
-              }
-          });
+
 
         AccelerateDecelerateInterpolator ACCELERATE_DECELERATE = new AccelerateDecelerateInterpolator();
         RandomTransitionGenerator generator = new RandomTransitionGenerator(4000, ACCELERATE_DECELERATE);
@@ -101,7 +100,7 @@ public class Rec_htmlView  extends AppCompatActivity implements View.OnClickList
 
 
         textView=(TextView)findViewById(R.id.topic);
-        textView1=(TextView)findViewById(R.id.detail);
+        htmlTextView=(HtmlTextView)findViewById(R.id.detail);
         textView2=(TextView)findViewById(R.id.date);
         share=(ImageView)findViewById(R.id.share);
         //  rootContent = (LinearLayout)findViewById(R.id.root_content);
@@ -296,7 +295,10 @@ public class Rec_htmlView  extends AppCompatActivity implements View.OnClickList
 
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
         textView.setText(topic);
-        textView1.setText(Html.fromHtml(detail));
+      //  htmlTextView.setText(Html.fromHtml(detail));
+        htmlTextView.setHtml(detail,
+                new HtmlHttpImageGetter(htmlTextView));
+
         textView2.setText(date);
         Picasso
                 .with(getApplicationContext())

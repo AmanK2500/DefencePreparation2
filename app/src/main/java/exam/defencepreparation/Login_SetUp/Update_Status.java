@@ -35,7 +35,7 @@ public class Update_Status extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update__status);
 
-        //Firebase
+        //Firebase user
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = mCurrentUser.getUid();
 

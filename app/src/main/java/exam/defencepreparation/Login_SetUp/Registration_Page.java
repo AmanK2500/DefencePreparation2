@@ -163,6 +163,7 @@ public class Registration_Page extends AppCompatActivity {
                     userMap.put("status", "Welcome to Defence Exam App.");
                     userMap.put("image", "default");
                     userMap.put("thumb_image", "default");
+                    userMap.put("view", "0");
                     userMap.put("device_token", device_token);
 
                     mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {

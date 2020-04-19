@@ -10,15 +10,13 @@
     <application
         android:name=".AdsMob.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/defencelogocrop"
+        android:icon="@mipmap/myapplogo"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
         <activity android:name=".Login_SetUp.Reset_Password" />
-        <activity android:name=".Login_SetUp.MainActivity" />
-        <activity android:name=".Login_SetUp.Login_activity"/>
-        <activity android:name=".Login_SetUp.SplashScreen">
+        <activity android:name=".Login_SetUp.Login_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +25,8 @@
         </activity>
         <activity android:name=".Login_SetUp.Update_Status" />
         <activity android:name=".Login_SetUp.My_Profile_setting" />
-        <activity android:name=".Login_SetUp.Registration_Page" />
+        <activity android:name=".Login_SetUp.Registration_Page"></activity>
+        <activity android:name=".Login_SetUp.MainActivity"></activity>
         <activity
             android:name=".CAPF_AC_2020.Capf_ac_2020_home"
             android:theme="@style/NoActionBar" />

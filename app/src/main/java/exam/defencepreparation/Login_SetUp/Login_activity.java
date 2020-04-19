@@ -29,7 +29,7 @@ public class Login_activity extends AppCompatActivity {
     FirebaseAuth auth;
     Button button, forget;
     ImageView loginimageView;
-    TextView forget1,signup;
+    TextView forget1,signup,skip;
     private FirebaseUser mCurrentUser;
 
     private ProgressDialog loadingbar;
@@ -46,6 +46,7 @@ public class Login_activity extends AppCompatActivity {
         loginimageView=(ImageView) findViewById(R.id.login);
         forget1=(TextView)findViewById(R.id.forget);
         signup=(TextView) findViewById(R.id.signup);
+        skip=(TextView) findViewById(R.id.skip);
 
 
         loadingbar = new ProgressDialog(this);
@@ -55,6 +56,15 @@ public class Login_activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i =new  Intent(Login_activity.this, Reset_Password.class);
+                startActivity(i);
+            }
+        });
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i =new  Intent(Login_activity.this, MainActivity.class);
                 startActivity(i);
             }
         });
@@ -81,6 +91,32 @@ public class Login_activity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = auth.getCurrentUser();
+
+        if(currentUser == null){
+
+
+            Toast.makeText(Login_activity.this,"Login with Email and password",Toast.LENGTH_LONG).show();
+
+        } else {
+
+            sendToStart();
+        }
+
+    }
+    private void sendToStart() {
+
+        Intent startIntent = new Intent(Login_activity.this, MainActivity.class);
+        startActivity(startIntent);
+        finish();
+
+    }
+
+
 
 
 
@@ -92,6 +128,13 @@ public class Login_activity extends AppCompatActivity {
             Toast.makeText(Login_activity.this,"enter email",Toast.LENGTH_LONG).show();
         }
 
+        else if(TextUtils.isEmpty(userPassword))
+        {
+
+            Toast.makeText(Login_activity.this,"Enter Password",Toast.LENGTH_LONG).show();
+        }
+
+
         else {
 
             loadingbar.setTitle("Login Account");
@@ -100,8 +143,9 @@ public class Login_activity extends AppCompatActivity {
 
 
 
-            auth.signInWithEmailAndPassword(emailAddress , userPassword)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+
+            auth.signInWithEmailAndPassword(emailAddress , userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -112,11 +156,10 @@ public class Login_activity extends AppCompatActivity {
                             // signed in user can be handled in the listener.
                             if (!task.isSuccessful()) {
                                 //Log.w("TAG", "signInWithEmail:failed", task.getException());
-
                             } else {
                                 checkIfEmailVerified();
                             }
-                            // ...loadingbar.dismiss();
+                         loadingbar.dismiss();
                         }
                     });
         }

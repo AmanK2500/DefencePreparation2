@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/colorPrimaryDark"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
 
@@ -72,4 +73,12 @@
         android:text="Hello i am using defence Exam app Defence Exam app"
         android:textColor="@android:color/white" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/signout"
+        android:text="Sign out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Button>
+
+</LinearLayout>
