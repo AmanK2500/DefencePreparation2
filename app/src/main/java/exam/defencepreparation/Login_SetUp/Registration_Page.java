@@ -152,6 +152,7 @@ public class Registration_Page extends AppCompatActivity {
 
                     FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
                     String uid = current_user.getUid();
+
                     // String current_user_id=mAuth.getCurrentUser().getUid();
 
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);

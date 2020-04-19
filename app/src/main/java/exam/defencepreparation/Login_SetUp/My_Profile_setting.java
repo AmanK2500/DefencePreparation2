@@ -136,11 +136,6 @@ public class My_Profile_setting extends AppCompatActivity {
 
                 startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
 
-
-
-
-
-
             }
         });
 

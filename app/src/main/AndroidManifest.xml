@@ -15,6 +15,8 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
+        <activity android:name=".SSB.read_story"></activity>
+        <activity android:name=".SSB.ppdt_story" />
         <activity android:name=".Login_SetUp.Reset_Password" />
         <activity android:name=".Login_SetUp.Login_activity"/>
         <activity android:name=".Login_SetUp.SplashScreen">
@@ -26,8 +28,8 @@
         </activity>
         <activity android:name=".Login_SetUp.Update_Status" />
         <activity android:name=".Login_SetUp.My_Profile_setting" />
-        <activity android:name=".Login_SetUp.Registration_Page"></activity>
-        <activity android:name=".Login_SetUp.MainActivity"></activity>
+        <activity android:name=".Login_SetUp.Registration_Page" />
+        <activity android:name=".Login_SetUp.MainActivity" />
         <activity
             android:name=".CAPF_AC_2020.Capf_ac_2020_home"
             android:theme="@style/NoActionBar" />

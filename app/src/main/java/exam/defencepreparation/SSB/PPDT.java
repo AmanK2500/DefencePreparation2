@@ -3,13 +3,16 @@ package exam.defencepreparation.SSB;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.ads.AdListener;
@@ -26,6 +29,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import dmax.dialog.SpotsDialog;
+import exam.defencepreparation.Login_SetUp.Login_activity;
+import exam.defencepreparation.Login_SetUp.My_Profile_setting;
+import exam.defencepreparation.Login_SetUp.Update_Status;
 import exam.defencepreparation.R;
 import exam.defencepreparation.news.NewsDetail;
 import static exam.defencepreparation.R.layout.statescontain;
@@ -155,7 +161,21 @@ public class PPDT  extends Fragment {
             protected void populateViewHolder(PPDT.MyViewHolder viewHolder, final NewsDetail model, int position) {
 
                 viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
+                final String user_id = getRef(position).getKey();
+
                 dialog.dismiss();
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent status_intent = new Intent(getActivity(), read_story.class);
+                        status_intent.putExtra("post_id", user_id);
+                        startActivity(status_intent);
+
+
+                    }
+                });
 
 
             }
@@ -170,6 +190,7 @@ public class PPDT  extends Fragment {
 
         TextView post_desc;
         View mView;
+        Button read,write;
         public MyViewHolder(View itemView)
 
 
