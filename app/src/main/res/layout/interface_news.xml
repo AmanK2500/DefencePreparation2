@@ -31,30 +31,43 @@
             android:background="#A0333639"
             android:scaleType="fitCenter" />
 
-        <TextView
+        <LinearLayout
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+            android:layout_weight="9"
             android:text="date"
             android:id="@+id/date"
-
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="normal"
             android:textColor="#485563"
             android:textSize="12sp"
             android:layout_marginLeft="9dp"
             />
+
+            <TextView
+                android:text="view : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="normal"
+                android:textColor="#485563"
+                android:textSize="12sp"
+                />
 
         <TextView
             android:text="view"
             android:id="@+id/view"
-
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="normal"
             android:textColor="#485563"
             android:textSize="12sp"
-            android:layout_marginLeft="9dp"
             />
-
+        </LinearLayout>
 
         <TextView
             android:padding="5dp"

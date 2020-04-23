@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,13 +33,15 @@ import dmax.dialog.SpotsDialog;
 import exam.defencepreparation.R;
 import exam.defencepreparation.Recycler_View_Click;
 import exam.defencepreparation.news.NewsDetail;
+import io.reactivex.annotations.NonNull;
+
 import static exam.defencepreparation.R.layout.interface_news;
 
 
 public class Navy extends Fragment {
     AdView mAdView;
     private RecyclerView mRecyclerView;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,ndatabaseReference;
     TextView read;
     AlertDialog dialog;
 
@@ -159,7 +164,10 @@ public class Navy extends Fragment {
                 viewHolder.setTopic(model.getTopic());
                 viewHolder.setDetail(model.getDetail());
                 viewHolder.setDate(model.getDate());
+                viewHolder.setView(model.getView());
                 viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
+                final    String user_id = getRef(position).getKey();
+
                 dialog.dismiss();
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
@@ -169,12 +177,67 @@ public class Navy extends Fragment {
                         String detail="";
                         String date="";
                         String image="";
+                        String view="";
                         String link="Navy_blog";
 
                         topic=model.getTopic();
                         detail=model.getDetail();
                         date=model.getDate();
                         image=model.getImage();
+                        view=model.getView();
+
+                        ndatabaseReference= FirebaseDatabase.getInstance().getReference().child("Navy_blog").child(user_id);
+
+                        if(view==null)
+                        {
+                            int new_view_value = 0;
+                            int increase_view = new_view_value +1;
+                            String updated_view = String.valueOf(increase_view);
+
+                            ndatabaseReference.child("view").setValue(updated_view).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if(task.isSuccessful()){
+
+                                        Toast.makeText(getActivity(), "Enjoy Learning.", Toast.LENGTH_LONG).show();
+
+
+                                    } else {
+
+                                        Toast.makeText(getActivity(), "There was some error in saving Changes.", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+                            });
+
+                        }
+
+                        else {
+                            int view_count = Integer.parseInt(view);
+                            int increase_view = view_count + 1;
+                            String updated_view = String.valueOf(increase_view);
+                            ndatabaseReference.child("view").setValue(updated_view).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+
+                                        Toast.makeText(getActivity(), "Enjoy Learning.", Toast.LENGTH_LONG).show();
+
+
+                                    } else {
+
+                                        Toast.makeText(getActivity(), "There was some error in saving Changes.", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+                            });
+
+                        }
+
 
 
                         Intent imgFullScrn = new Intent(getActivity(), Recycler_View_Click.class);
@@ -224,6 +287,10 @@ public class Navy extends Fragment {
         public void setDate(String date){
             TextView  Date = (TextView)mView.findViewById(R.id.date);
             Date.setText(date);
+        }
+        public void setView(String view){
+            TextView  showView = (TextView)mView.findViewById(R.id.view);
+            showView.setText(view);
         }
 
         public void setImage(final Context ctx, final String image){

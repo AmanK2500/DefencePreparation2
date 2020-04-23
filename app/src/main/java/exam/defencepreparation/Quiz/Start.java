@@ -43,7 +43,7 @@ public class Start extends AppCompatActivity {
 
 
         database = FirebaseDatabase.getInstance();
-        questions = database.getReference("Questions");
+        questions = database.getReference("Question_QUIZ");
 
         loadQuestion(Common.categoryId);
         btnPlay = findViewById(R.id.btnPlay);

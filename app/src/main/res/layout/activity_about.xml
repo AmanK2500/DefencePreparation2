@@ -151,17 +151,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textSize="15sp"
         android:textStyle="bold"
-        android:textColor="@android:color/darker_gray"
-        android:text="Developed by Aman kumar."/>
+        android:textSize="15sp"
+        android:textColor="#123"
+        android:text="Developed by ALL Solution Lab."/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:textColor="@android:color/darker_gray"
-        android:text="Copyright © 2019. All Rights Reserved."/>
+        android:textColor="#123"
+        android:text="Copyright © 2020. All Rights Reserved."/>
 
 </LinearLayout>
 

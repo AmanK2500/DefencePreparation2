@@ -31,7 +31,6 @@ public class SSB_Final extends AppCompatActivity {
         adapter.getFragment(new OIR(),"Chat");
         adapter.getFragment(new PPDT(),"Chat");
         adapter.getFragment(new WAT(),"Contact");
-        adapter.getFragment(new SRT(),"Status");
         mpage.setAdapter(adapter);
         mtab.setupWithViewPager(mpage);
 

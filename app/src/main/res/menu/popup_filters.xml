@@ -4,7 +4,6 @@
 
     >
     <item android:id="@+id/menu_keyword"
-        android:title="Keyword" />
-    <item android:id="@+id/menu_popularity"
-        android:title="Popularity" />
+        android:title="Log In" />
+
 </menu>

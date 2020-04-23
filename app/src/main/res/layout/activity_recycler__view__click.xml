@@ -36,7 +36,6 @@
                         android:cropToPadding="true"
                         android:background="@drawable/newscreen"
                         android:id="@+id/pic"
-
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_gravity="center"
@@ -60,7 +59,7 @@
                             android:layout_marginLeft="10dp"
                             android:textSize="20sp"
                             android:fontFamily="@font/merriweather_regular"
-                            android:textColor="#f75a06" />
+                            android:textColor="#123" />
 
 
                         <ImageView
@@ -73,7 +72,8 @@
 
                     <org.sufficientlysecure.htmltextview.HtmlTextView
                         android:layout_marginTop="7dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:text="Hello aman kumar"
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:fontFamily="@font/pt_sans"

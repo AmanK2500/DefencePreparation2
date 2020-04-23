@@ -12,15 +12,23 @@
     <activity
         android:id="@+id/profile"
         android:name="exam.defencepreparation.Login_SetUp.My_Profile_setting"
-        tools:layout="@layout/activity_my__profile_setting" />
+        tools:layout="@layout/profilecheck" />
     <fragment
         android:id="@+id/user"
         android:name="exam.defencepreparation.Login_SetUp.All_User_List"
         tools:layout="@layout/fragment_airforce" />
     <fragment
         android:id="@+id/jobs"
-        android:name="exam.defencepreparation.Login_SetUp.MainFragment"
-        tools:layout="@layout/trydashboard" />
+        android:name="exam.defencepreparation.Login_SetUp.Sarkari_naukri"
+        tools:layout="@layout/fragment_airforce" />
+    <activity
+        android:id="@+id/AboutUs"
+        android:name="exam.defencepreparation.Static_GK.About"
+        tools:layout="@layout/activity_about" />
+    <fragment
+        android:id="@+id/InstagramPage"
+        android:name="exam.defencepreparation.Login_SetUp.Instagram_view_web"
+        tools:layout="@layout/fragment_instagram_view_web" />
 
 
 </navigation>

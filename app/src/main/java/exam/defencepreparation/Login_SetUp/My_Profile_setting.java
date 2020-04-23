@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.security.PrivateKey;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -47,24 +49,52 @@ public class My_Profile_setting extends AppCompatActivity {
     private FirebaseUser mCurrentUser;
     private Bitmap compressedImageFile;
     private Uri mainImageURI = null;
-
+    private Button signout;
     private CircleImageView mDisplayImage;
-    private TextView mName;
-    private TextView mStatus;
+    private TextView mName, email;
+    private TextView mStatus,Mobile,Addresss;
     private TextView mStatusBtn;
     private TextView mImageBtn;
+    private ImageView back;
+
     private static final int GALLERY_PICK = 1;
     private StorageReference mImageStorage;
     private ProgressDialog mProgressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profilecheck);
 
+
         mDisplayImage = (CircleImageView) findViewById(R.id.settings_image);
         mName = (TextView) findViewById(R.id.settings_name);
+        email = (TextView) findViewById(R.id.email);
+        Mobile = (TextView) findViewById(R.id.mobile);
+
+        Addresss = (TextView) findViewById(R.id.city);
+        back = (ImageView) findViewById(R.id.back);
+
+         back.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 finish();
+             }
+         });
+
         mStatus = (TextView) findViewById(R.id.settings_status);
+        signout=(Button)findViewById(R.id.signout);
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FirebaseAuth.getInstance().signOut();
+                Intent status_intent = new Intent(My_Profile_setting.this, Login_activity.class);
+                startActivity(status_intent);
+
+            }
+        });
 
         mStatusBtn = (TextView) findViewById(R.id.settings_status_btn);
         mImageBtn = (TextView) findViewById(R.id.settings_image_btn);
@@ -72,6 +102,9 @@ public class My_Profile_setting extends AppCompatActivity {
         mImageStorage = FirebaseStorage.getInstance().getReference();
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = mCurrentUser.getUid();
+        String  email_Id = mCurrentUser.getEmail();
+        email.setText(email_Id);
+
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(current_uid);
         mUserDatabase.keepSynced(true);
         mUserDatabase.addValueEventListener(new ValueEventListener() {
@@ -81,10 +114,14 @@ public class My_Profile_setting extends AppCompatActivity {
                 String name = dataSnapshot.child("name").getValue().toString();
                 final String image = dataSnapshot.child("image").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
-                String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
+                String mobile = dataSnapshot.child("mobile").getValue().toString();
+                String city = dataSnapshot.child("address").getValue().toString();
+
                 mainImageURI = Uri.parse(image);
                 mName.setText(name);
                 mStatus.setText(status);
+                Mobile.setText(mobile);
+                Addresss.setText(city);
                 if(!image.equals("default")) {
                     Picasso.with(My_Profile_setting.this).load(image).networkPolicy(NetworkPolicy.OFFLINE)
                             .placeholder(R.drawable.defence_logo_crop).into(mDisplayImage, new Callback() {
@@ -117,9 +154,14 @@ public class My_Profile_setting extends AppCompatActivity {
             public void onClick(View view) {
 
                 String status_value = mStatus.getText().toString();
+                String mobile = Mobile.getText().toString();
+                String city = Addresss.getText().toString();
 
                 Intent status_intent = new Intent(My_Profile_setting.this, Update_Status.class);
                 status_intent.putExtra("status_value", status_value);
+                status_intent.putExtra("mobile", mobile);
+                status_intent.putExtra("city", city);
+
                 startActivity(status_intent);
 
             }

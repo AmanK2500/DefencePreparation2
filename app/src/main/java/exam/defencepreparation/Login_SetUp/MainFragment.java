@@ -64,13 +64,14 @@ public class MainFragment extends Fragment {
 
     private DatabaseReference mUserDatabase;
     private FirebaseUser mCurrentUser;
+    FirebaseAuth auth;
     private StorageReference mImageStorage;
     private Uri mainImageURI = null;
     private RecyclerView mRecyclerView,nRecyclerView;
     private DatabaseReference mDatabase,nDatabase;
     private CircleImageView mDisplayImage;
     private TextView mName;
-    FirebaseAuth auth;
+
 
     CardView mycard1, mycard2, mycard3, mycard4, mycard5, mycard6,mycard7,mycard8;
     Intent i, ii, iii, iiii, iiiii, VI,VII,VIII;
@@ -111,7 +112,7 @@ public class MainFragment extends Fragment {
 
         // code for recyclerview two
 
-        nDatabase = FirebaseDatabase.getInstance().getReference("National_news");
+        nDatabase = FirebaseDatabase.getInstance().getReference("Ge_CE");
         nDatabase.keepSynced(true);
         nRecyclerView=(RecyclerView)view.findViewById(R.id.front_page_recycler_view2);
         nRecyclerView.hasFixedSize();
@@ -210,7 +211,7 @@ public class MainFragment extends Fragment {
             mycard3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(iii);
+                    showFilterPopup(v);
                 }
             });
             mycard4.setOnClickListener(new View.OnClickListener() {
@@ -219,11 +220,10 @@ public class MainFragment extends Fragment {
                     startActivity(iiii);
                 }
             });
-
             mycard5.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showFilterPopup(v);
+                    startActivity(iiiii);
                 }
             });
             mycard6.setOnClickListener(new View.OnClickListener() {
@@ -374,7 +374,7 @@ public class MainFragment extends Fragment {
                         String detail="";
                         String date="";
                         String image="";
-                        String link="National_news";
+                        String link="Ge_CE";
 
                         topic=model.getTopic();
                         detail=model.getDetail();
@@ -416,10 +416,10 @@ public class MainFragment extends Fragment {
                 String name = dataSnapshot.child("name").getValue().toString();
                 final String image = dataSnapshot.child("image").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
-                String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
+              //  String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
                 mainImageURI = Uri.parse(image);
                 mName.setText(name);
-                // mStatus.setText(status);
+               //  mStatus.setText(status);
                 if(!image.equals("default")) {
                     Picasso.with(getActivity()).load(image).networkPolicy(NetworkPolicy.OFFLINE)
                             .placeholder(R.drawable.defence_logo_crop).into(mDisplayImage, new Callback() {
@@ -516,11 +516,10 @@ public class MainFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_keyword:
-                        Toast.makeText(getActivity(), "Login !", Toast.LENGTH_SHORT).show();
+                       Intent intent= new Intent (getActivity(),Login_activity.class);
+                       startActivity(intent);
                         return true;
-                    case R.id.menu_popularity:
-                        Toast.makeText(getActivity(), "Sign Up!", Toast.LENGTH_SHORT).show();
-                        return true;
+
                     default:
                         return false;
                 }

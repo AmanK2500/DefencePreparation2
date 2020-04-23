@@ -142,7 +142,7 @@ public class Registration_Page extends AppCompatActivity {
 
 
 
-    private void register_user(final String display_name, String email, String password) {
+    private void register_user(final String display_name, final String email, String password) {
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -161,10 +161,11 @@ public class Registration_Page extends AppCompatActivity {
 
                     HashMap<String, String> userMap = new HashMap<>();
                     userMap.put("name", display_name);
+                    userMap.put("email", email);
                     userMap.put("status", "Welcome to Defence Exam App.");
                     userMap.put("image", "default");
-                    userMap.put("thumb_image", "default");
-                    userMap.put("view", "0");
+                    userMap.put("mobile", "default");
+                    userMap.put("address", "default");
                     userMap.put("device_token", device_token);
 
                     mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {

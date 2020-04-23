@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="5dp"
-    android:background="#485563"
     android:id="@+id/ll">
 
     <LinearLayout
@@ -17,17 +16,16 @@
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
-
-            android:background="#485563"
+            android:background="#6AFFFFFF"
             android:foreground="?android:attr/selectableItemBackground"
             android:id="@+id/bankcardId"
-            app:cardElevation="8dp"
-            app:cardCornerRadius="8dp"
+            app:cardElevation="3dp"
+            app:cardCornerRadius="6dp"
             android:layout_width="150dp"
             android:layout_height="200dp"
             >
             <RelativeLayout
-                android:background="#f9f7f7"
+                android:background="@drawable/backgroundcolour"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
@@ -38,7 +36,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_width="150dp"
                     android:layout_height="130dp"
-                    android:src="@drawable/loadingpic"
+                    android:src="@drawable/defencelogocrop"
                     />
 
                 <TextView
@@ -66,7 +64,7 @@
                     android:lineSpacingExtra="3dp"
                     android:maxLines="3"
                     android:text="the video series of history complete course"
-                    android:textColor="#123"
+                    android:textColor="@color/colorWhite"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 

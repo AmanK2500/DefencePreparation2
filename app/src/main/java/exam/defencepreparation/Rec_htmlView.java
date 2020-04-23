@@ -83,33 +83,26 @@ public class Rec_htmlView  extends AppCompatActivity implements View.OnClickList
         detail= extras.getString("detail");
         date= extras.getString("date");
         image= extras.getString("image");
+
         databaseID=extras.getString("datalink");
+
         imageView=(ImageView)findViewById(R.id.share);
 
-
-
         post_image=(KenBurnsView) findViewById(R.id.pic);
-
-
-
         AccelerateDecelerateInterpolator ACCELERATE_DECELERATE = new AccelerateDecelerateInterpolator();
         RandomTransitionGenerator generator = new RandomTransitionGenerator(4000, ACCELERATE_DECELERATE);
         post_image.setTransitionGenerator(generator);
         post_image.setTransitionListener(onTransittionListener());
-
-
-
         textView=(TextView)findViewById(R.id.topic);
         htmlTextView=(HtmlTextView)findViewById(R.id.detail);
         textView2=(TextView)findViewById(R.id.date);
         share=(ImageView)findViewById(R.id.share);
         //  rootContent = (LinearLayout)findViewById(R.id.root_content);
-
-
-
         mAdView = (AdView) findViewById(R.id.adView);
+
         mDatabase = FirebaseDatabase.getInstance().getReference(databaseID);
         mDatabase.keepSynced(true);
+
         mRecyclerView=(RecyclerView)findViewById(R.id.rec_click);
         mRecyclerView.hasFixedSize();
         LinearLayoutManager mLayoutManger = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,true);
@@ -118,8 +111,7 @@ public class Rec_htmlView  extends AppCompatActivity implements View.OnClickList
         mRecyclerView.setLayoutManager(mLayoutManger);
 
 
-        AdRequest adRequest1 = new AdRequest.Builder()
-                .build();
+        AdRequest adRequest1 = new AdRequest.Builder().build();
 
         mAdView.setAdListener(new AdListener() {
             @Override
@@ -148,11 +140,6 @@ public class Rec_htmlView  extends AppCompatActivity implements View.OnClickList
         });
 
         mAdView.loadAd(adRequest1);
-
-
-
-
-
     }
 
 
@@ -170,18 +157,9 @@ public class Rec_htmlView  extends AppCompatActivity implements View.OnClickList
         };
     }
 
-
-    // share code here...................................
-
-    /*  Find all views Ids  */
     private void findViews() {
         share = (ImageView) findViewById(R.id.share);
-
-
         rootContent = (LinearLayout) findViewById(R.id.root_content);
-
-
-
     }
 
     /*  Implement Click events over Buttons */
@@ -397,49 +375,7 @@ public class Rec_htmlView  extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void createPdf(){
-        // create a new document
-        PdfDocument document = new PdfDocument();
-        // crate a page description
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
-        // start a page
-        PdfDocument.Page page = document.startPage(pageInfo);
-        Canvas canvas = page.getCanvas();
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        canvas.drawCircle(50, 50, 30, paint);
-        paint.setColor(Color.BLACK);
-        //canvas.drawText(sometext, 80, 50, paint);
-        //canvas.drawt
-        // finish the page
-        document.finishPage(page);
-// draw text on the graphics object of the page
-        // Create Page 2
-        pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 2).create();
-        page = document.startPage(pageInfo);
-        canvas = page.getCanvas();
-        paint = new Paint();
-        paint.setColor(Color.BLUE);
-        canvas.drawCircle(100, 100, 100, paint);
-        document.finishPage(page);
-        // write the document content
-        String directory_path = Environment.getExternalStorageDirectory().getPath() + "/mypdf/";
-        File file = new File(directory_path);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        String targetPdf = directory_path+"test-2.pdf";
-        File filePath = new File(targetPdf);
-        try {
-            document.writeTo(new FileOutputStream(filePath));
-            Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            Log.e("main", "error "+e.toString());
-            Toast.makeText(this, "Something wrong: " + e.toString(),  Toast.LENGTH_LONG).show();
-        }
-        // close the document
-        document.close();
-    }
+
 
 }
 

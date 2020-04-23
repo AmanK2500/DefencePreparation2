@@ -168,8 +168,12 @@ public class PPDT  extends Fragment {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String image="";
+                        image=model.getImage();
+
 
                         Intent status_intent = new Intent(getActivity(), read_story.class);
+                        status_intent.putExtra("image",image);
                         status_intent.putExtra("post_id", user_id);
                         startActivity(status_intent);
 

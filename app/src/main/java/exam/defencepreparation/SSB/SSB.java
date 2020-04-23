@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -31,6 +34,7 @@ import exam.defencepreparation.R;
 import exam.defencepreparation.Rec_htmlView;
 import exam.defencepreparation.Recycler_View_Click;
 import exam.defencepreparation.news.NewsDetail;
+import io.reactivex.annotations.NonNull;
 
 import static exam.defencepreparation.R.layout.interface_news;
 
@@ -42,7 +46,7 @@ import static exam.defencepreparation.R.layout.interface_news;
 public class SSB extends Fragment {
     AdView mAdView;
     private RecyclerView mRecyclerView;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,ndatabaseReference;
     TextView read;
     AlertDialog dialog;
 
@@ -56,15 +60,11 @@ public class SSB extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_airforce, container, false);
-
         dialog = new SpotsDialog(getActivity());
         dialog.show();
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("StaticGK");
         mDatabase.keepSynced(true);
         mRecyclerView=(RecyclerView)view.findViewById(R.id.rec_airforce);
-
-
         mRecyclerView.hasFixedSize();
         LinearLayoutManager  mLayoutManger = new LinearLayoutManager(this.getActivity());
         mLayoutManger.setReverseLayout(true);
@@ -72,17 +72,8 @@ public class SSB extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManger);
 
         //banner ads code here
-
-
         mAdView = (AdView) view.findViewById(R.id.adView);
-
-
-
-        AdRequest adRequest1 = new AdRequest.Builder()
-                // .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                // Check the LogCat to get your test device ID
-                .build();
-
+        AdRequest adRequest1 = new AdRequest.Builder().build();
         mAdView.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
@@ -108,15 +99,9 @@ public class SSB extends Fragment {
                 super.onAdOpened();
             }
         });
-
         mAdView.loadAd(adRequest1);
-
-
         return view;
-
     }
-
-
     @Override
     public void onPause() {
         if (mAdView != null) {
@@ -124,7 +109,6 @@ public class SSB extends Fragment {
         }
         super.onPause();
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -132,7 +116,6 @@ public class SSB extends Fragment {
             mAdView.resume();
         }
     }
-
     @Override
     public void onDestroy() {
         if (mAdView != null) {
@@ -145,49 +128,94 @@ public class SSB extends Fragment {
 
 
     }
-
-
-
     @Override
     public void onStart() {
         super.onStart();
-        //progressBar.setVisibility(VISIBLE);
-
-
         FirebaseRecyclerAdapter<NewsDetail, SSB.MyViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<NewsDetail, SSB.MyViewHolder>
                 (NewsDetail.class , interface_news, SSB.MyViewHolder.class,mDatabase) {
-
             @Override
             protected void populateViewHolder(SSB.MyViewHolder viewHolder, final NewsDetail model, int position) {
-
-
                 viewHolder.setTopic(model.getTopic());
                 viewHolder.setDetail(model.getDetail());
                 viewHolder.setDate(model.getDate());
+                viewHolder.setView(model.getView());
                 viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
+                final String user_id = getRef(position).getKey();
+
                 dialog.dismiss();
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String topic="";
-                        String detail="";
-                        String date="";
-                        String image="";
-                        String link="StaticGK";
+                        String topic = "";
+                        String detail = "";
+                        String date = "";
+                        String image = "";
+                        String view = "";
+                        String link = "StaticGK";
 
-                        topic=model.getTopic();
-                        detail=model.getDetail();
-                        date=model.getDate();
-                        image=model.getImage();
+                        topic = model.getTopic();
+                        detail = model.getDetail();
+                        date = model.getDate();
+                        image = model.getImage();
+                        view = model.getView();
+
+                        ndatabaseReference = FirebaseDatabase.getInstance().getReference().child("StaticGK").child(user_id);
+
+                        if (view == null) {
+                            int new_view_value = 0;
+                            int increase_view = new_view_value + 1;
+                            String updated_view = String.valueOf(increase_view);
+
+                            ndatabaseReference.child("view").setValue(updated_view).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+
+                                        Toast.makeText(getActivity(), "Enjoy Learning.", Toast.LENGTH_LONG).show();
 
 
-                        Intent imgFullScrn = new Intent(getActivity(), Rec_htmlView.class);
-                        imgFullScrn.putExtra("topic",topic);
-                        imgFullScrn.putExtra("detail",detail);
-                        imgFullScrn.putExtra("date",date);
-                        imgFullScrn.putExtra("image",image);
-                        imgFullScrn.putExtra("datalink",link);
+                                    } else {
+
+                                        Toast.makeText(getActivity(), "There was some error in saving Changes.", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+                            });
+
+                        } else {
+                            int view_count = Integer.parseInt(view);
+                            int increase_view = view_count + 1;
+                            String updated_view = String.valueOf(increase_view);
+                            ndatabaseReference.child("view").setValue(updated_view).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+
+                                        Toast.makeText(getActivity(), "Enjoy Learning.", Toast.LENGTH_LONG).show();
+
+
+                                    } else {
+
+                                        Toast.makeText(getActivity(), "There was some error in saving Changes.", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+                            });
+
+                        }
+
+                        Intent imgFullScrn = new Intent(getActivity(), Recycler_View_Click.class);
+                        imgFullScrn.putExtra("topic", topic);
+                        imgFullScrn.putExtra("detail", detail);
+                        imgFullScrn.putExtra("date", date);
+                        imgFullScrn.putExtra("image", image);
+                        imgFullScrn.putExtra("datalink", link);
+
 
                         startActivity(imgFullScrn);
                     }
@@ -201,8 +229,7 @@ public class SSB extends Fragment {
 
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         TextView post_desc;
         View mView;
@@ -230,6 +257,11 @@ public class SSB extends Fragment {
             TextView  Date = (TextView)mView.findViewById(R.id.date);
             Date.setText(date);
         }
+        public void setView(String view){
+            TextView  showView = (TextView)mView.findViewById(R.id.view);
+            showView.setText(view);
+        }
+
 
         public void setImage(final Context ctx, final String image){
             final KenBurnsView post_image=(KenBurnsView) mView.findViewById(R.id.new_pic);

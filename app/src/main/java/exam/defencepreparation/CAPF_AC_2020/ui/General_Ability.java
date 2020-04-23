@@ -16,12 +16,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
@@ -40,6 +43,7 @@ import exam.defencepreparation.Youtube.Youtube_MainActivity;
 import exam.defencepreparation.Youtube_general_study.Polity;
 import exam.defencepreparation.news.Army;
 import exam.defencepreparation.news.NewsDetail;
+import io.reactivex.annotations.NonNull;
 
 import static exam.defencepreparation.R.layout.interface_news;
 import static exam.defencepreparation.R.layout.youtube_rec_design;
@@ -47,7 +51,7 @@ import static exam.defencepreparation.R.layout.youtube_rec_design;
 public class General_Ability extends Fragment {
     AdView mAdView;
     private RecyclerView mRecyclerView;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,ndatabaseReference;
     TextView read;
     AlertDialog dialog;
     Dialog myDialog;
@@ -162,79 +166,115 @@ public class General_Ability extends Fragment {
         //progressBar.setVisibility(VISIBLE);
 
 
-        FirebaseRecyclerAdapter<NewsDetail, Army.MyViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<NewsDetail, Army.MyViewHolder>
-                (NewsDetail.class , youtube_rec_design, Army.MyViewHolder.class,mDatabase) {
+        FirebaseRecyclerAdapter<NewsDetail, General_Ability.MyViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<NewsDetail, General_Ability.MyViewHolder>
+                (NewsDetail.class , youtube_rec_design, General_Ability.MyViewHolder.class,mDatabase) {
 
             @Override
-            protected void populateViewHolder(final Army.MyViewHolder viewHolder, final NewsDetail model, int position) {
-
-                // screen shot code  here
-
-                //     View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
-
-
-                //
+            protected void populateViewHolder(final General_Ability.MyViewHolder viewHolder, final NewsDetail model, int position) {
                 viewHolder.setTopic(model.getTopic());
                 viewHolder.setDetail(model.getDetail());
+                viewHolder.setView(model.getView());
                 viewHolder.setDate(model.getDate());
                 viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
+                final    String user_id = getRef(position).getKey();
+
                 dialog.dismiss();
-
-
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        if (Function.isNetworkAvailable(getActivity())) {
-
-                            String topic="";
-                            String detail="";
-                            String date="";
-                            String image="";
-                            String link="Ge_GA";
+                        String topic="";
+                        String detail="";
+                        String date="";
+                        String image="";
+                        String view="";
+                        String link="Ge_GA";
 
 
-                            topic=model.getTopic();
-                            detail=model.getDetail();
-                            date=model.getDate();
-                            image=model.getImage();
+                        topic=model.getTopic();
+                        detail=model.getDetail();
+                        date=model.getDate();
+                        image=model.getImage();
+                        view=model.getView();
 
-                            Intent imgFullScrn = new Intent(getActivity(), Youtube_MainActivity.class);
-                            imgFullScrn.putExtra("video_id",topic);
-                            imgFullScrn.putExtra("database_id",link);
-                            imgFullScrn.putExtra("date",date);
-                            imgFullScrn.putExtra("detail",detail);
-                            startActivity(imgFullScrn);
+                        ndatabaseReference= FirebaseDatabase.getInstance().getReference().child("Ge_GA").child(user_id);
 
+                        if(view==null)
+                        {
+                            int new_view_value = 0;
+                            int increase_view = new_view_value +1;
+                            String updated_view = String.valueOf(increase_view);
+
+                            ndatabaseReference.child("view").setValue(updated_view).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if(task.isSuccessful()){
+
+                                        Toast.makeText(getActivity(), "Enjoy Learning.", Toast.LENGTH_LONG).show();
+
+
+                                    } else {
+
+                                        Toast.makeText(getActivity(), "There was some error in saving Changes.", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+                            });
 
                         }
+
                         else {
-                            myDialog.setContentView(R.layout.custompopup);
-                            myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            myDialog.show();
+                            int view_count = Integer.parseInt(view);
+                            int increase_view = view_count + 1;
+                            String updated_view = String.valueOf(increase_view);
+                            ndatabaseReference.child("view").setValue(updated_view).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+
+                                        Toast.makeText(getActivity(), "Enjoy Learning.", Toast.LENGTH_LONG).show();
+
+
+                                    } else {
+
+                                        Toast.makeText(getActivity(), "There was some error in saving Changes.", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+                            });
+
                         }
 
 
-                    }
 
+
+
+                        Intent imgFullScrn = new Intent(getActivity(), Rec_htmlView.class);
+                        imgFullScrn.putExtra("topic",topic);
+                        imgFullScrn.putExtra("detail",detail);
+                        imgFullScrn.putExtra("date",date);
+                        imgFullScrn.putExtra("image",image);
+                        imgFullScrn.putExtra("datalink",link);
+
+
+                        startActivity(imgFullScrn);
+                    }
                 });
 
             }
         };
-
         firebaseRecyclerAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
 
     }
 
-
-
-
-
-    public class MyViewHolder extends RecyclerView.ViewHolder
+    public static class MyViewHolder extends RecyclerView.ViewHolder
     {
-        Button share;
+
         TextView post_desc;
         View mView;
         public MyViewHolder(View itemView)
@@ -243,8 +283,6 @@ public class General_Ability extends Fragment {
         {
             super(itemView);
             mView=itemView;
-
-            share=mView.findViewById(R.id.share);
 
         }
 
@@ -256,13 +294,15 @@ public class General_Ability extends Fragment {
 
         public void setDetail(String detail){
             post_desc = (TextView)mView.findViewById(R.id.topic1);
-            post_desc.setText(Html.fromHtml(detail));
-
-        }
+            post_desc.setText(Html.fromHtml(detail));        }
 
         public void setDate(String date){
             TextView  Date = (TextView)mView.findViewById(R.id.time);
             Date.setText(date);
+        }
+        public void setView(String view){
+            TextView  view_text = (TextView)mView.findViewById(R.id.views);
+            view_text.setText(view);
         }
 
         public void setImage(final Context ctx, final String image){
@@ -283,12 +323,5 @@ public class General_Ability extends Fragment {
 
 
     }
-
-
 }
-
-
-
-
-
 

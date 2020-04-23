@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 class MyPageAdapter extends FragmentPagerAdapter {
     ArrayList<Fragment> mfragments=new ArrayList<Fragment>();
-    private String mtittle[] = new String[]{"SSB","OIR","PPDT/TAT", "WAT", "SRT"};
+    private String mtittle[] = new String[]{"SSB","OIR","PPDT-TAT", "WAT-SRT"};
 
 
 

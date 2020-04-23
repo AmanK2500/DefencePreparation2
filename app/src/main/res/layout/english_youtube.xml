@@ -2,8 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#485563"
+    android:background="#00BCD4"
     android:orientation="vertical"
+    android:weightSum="10"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -26,7 +27,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="15dp"
                 android:text="Quiz-Test Your Self"
-                android:textColor="#E7CF17"
+                android:textColor="#fff"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -45,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="15dp"
-                android:textColor="#FFE7CF17"
+                android:textColor="#fff"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -66,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="15dp"
-                android:textColor="#FFE7CF17"
+                android:textColor="#fff"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 

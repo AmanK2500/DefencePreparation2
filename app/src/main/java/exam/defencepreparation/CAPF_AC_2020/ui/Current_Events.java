@@ -13,12 +13,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
@@ -31,18 +33,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import dmax.dialog.SpotsDialog;
 import exam.defencepreparation.R;
 import exam.defencepreparation.Rec_htmlView;
-import exam.defencepreparation.Recycler_View_Click;
-import exam.defencepreparation.news.Army;
-import exam.defencepreparation.news.NewsDetail;
 
-import static exam.defencepreparation.R.layout.interface_news;
+
+import exam.defencepreparation.news.NewsDetail;
+import io.reactivex.annotations.NonNull;
+
 import static exam.defencepreparation.R.layout.youtube_rec_design;
 
 
 public class Current_Events extends Fragment {
     AdView mAdView;
     private RecyclerView mRecyclerView;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,ndatabaseReference;
     TextView read;
     AlertDialog dialog;
 
@@ -80,8 +82,6 @@ public class Current_Events extends Fragment {
 
 
         AdRequest adRequest1 = new AdRequest.Builder()
-                // .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                // Check the LogCat to get your test device ID
                 .build();
 
         mAdView.setAdListener(new AdListener() {
@@ -155,40 +155,91 @@ public class Current_Events extends Fragment {
         //progressBar.setVisibility(VISIBLE);
 
 
-        FirebaseRecyclerAdapter<NewsDetail, Army.MyViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<NewsDetail, Army.MyViewHolder>
-                (NewsDetail.class , youtube_rec_design, Army.MyViewHolder.class,mDatabase) {
+        FirebaseRecyclerAdapter<NewsDetail, Current_Events.MyViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<NewsDetail, Current_Events.MyViewHolder>
+                (NewsDetail.class , youtube_rec_design, Current_Events.MyViewHolder.class,mDatabase) {
 
             @Override
-            protected void populateViewHolder(final Army.MyViewHolder viewHolder, final NewsDetail model, int position) {
-
-                // screen shot code  here
-
-                //     View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
-
-
-                //
+            protected void populateViewHolder(final Current_Events.MyViewHolder viewHolder, final NewsDetail model, int position) {
                 viewHolder.setTopic(model.getTopic());
                 viewHolder.setDetail(model.getDetail());
+                viewHolder.setView(model.getView());
                 viewHolder.setDate(model.getDate());
                 viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
+                final    String user_id = getRef(position).getKey();
+
                 dialog.dismiss();
-
-
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String topic="";
                         String detail="";
-
                         String date="";
                         String image="";
+                        String view="";
                         String link="Ge_CE";
+
 
                         topic=model.getTopic();
                         detail=model.getDetail();
                         date=model.getDate();
                         image=model.getImage();
+                        view=model.getView();
+
+                        ndatabaseReference= FirebaseDatabase.getInstance().getReference().child("Ge_CE").child(user_id);
+
+                        if(view==null)
+                        {
+                            int new_view_value = 0;
+                            int increase_view = new_view_value +1;
+                            String updated_view = String.valueOf(increase_view);
+
+                            ndatabaseReference.child("view").setValue(updated_view).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if(task.isSuccessful()){
+
+                                        Toast.makeText(getActivity(), "Enjoy Learning.", Toast.LENGTH_LONG).show();
+
+
+                                    } else {
+
+                                        Toast.makeText(getActivity(), "There was some error in saving Changes.", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+                            });
+
+                        }
+
+                        else {
+                            int view_count = Integer.parseInt(view);
+                            int increase_view = view_count + 1;
+                            String updated_view = String.valueOf(increase_view);
+                            ndatabaseReference.child("view").setValue(updated_view).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+
+                                        Toast.makeText(getActivity(), "Enjoy Learning.", Toast.LENGTH_LONG).show();
+
+
+                                    } else {
+
+                                        Toast.makeText(getActivity(), "There was some error in saving Changes.", Toast.LENGTH_LONG).show();
+
+                                    }
+
+                                }
+                            });
+
+                        }
+
+
+
 
 
                         Intent imgFullScrn = new Intent(getActivity(), Rec_htmlView.class);
@@ -210,13 +261,9 @@ public class Current_Events extends Fragment {
 
     }
 
-
-
-
-
-    public class MyViewHolder extends RecyclerView.ViewHolder
+    public static class MyViewHolder extends RecyclerView.ViewHolder
     {
-        Button share;
+
         TextView post_desc;
         View mView;
         public MyViewHolder(View itemView)
@@ -225,8 +272,6 @@ public class Current_Events extends Fragment {
         {
             super(itemView);
             mView=itemView;
-
-            share=mView.findViewById(R.id.share);
 
         }
 
@@ -238,13 +283,15 @@ public class Current_Events extends Fragment {
 
         public void setDetail(String detail){
             post_desc = (TextView)mView.findViewById(R.id.topic1);
-            post_desc.setText(Html.fromHtml(detail));
-
-        }
+            post_desc.setText(Html.fromHtml(detail));        }
 
         public void setDate(String date){
             TextView  Date = (TextView)mView.findViewById(R.id.time);
             Date.setText(date);
+        }
+        public void setView(String view){
+            TextView  view_text = (TextView)mView.findViewById(R.id.views);
+            view_text.setText(view);
         }
 
         public void setImage(final Context ctx, final String image){
@@ -265,12 +312,5 @@ public class Current_Events extends Fragment {
 
 
     }
-
-
 }
-
-
-
-
-
 

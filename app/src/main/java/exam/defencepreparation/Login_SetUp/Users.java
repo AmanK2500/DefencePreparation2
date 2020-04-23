@@ -11,6 +11,29 @@ public class Users {
     public String status;
     public String thumb_image;
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Users(String mobile, String address) {
+        this.mobile = mobile;
+        this.address = address;
+    }
+
+    public String mobile,address;
+
     public String getView() {
         return view;
     }

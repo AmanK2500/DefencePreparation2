@@ -47,7 +47,7 @@ import static exam.defencepreparation.R.layout.youtube_rec_design;
 public class Recycler_View_Click extends AppCompatActivity implements View.OnClickListener {
     AdView mAdView;
     TextView textView,textView1,textView2;
-    private String topic,databaseID;
+    private String topic,databaseID,databaseID1;
     private String detail,date,image;
     private KenBurnsView post_image;
     private RecyclerView mRecyclerView;
@@ -56,11 +56,6 @@ public class Recycler_View_Click extends AppCompatActivity implements View.OnCli
     private LinearLayout rootContent;
     TextView app_name;
     ImageView imageView;
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +71,9 @@ public class Recycler_View_Click extends AppCompatActivity implements View.OnCli
         date= extras.getString("date");
         image= extras.getString("image");
         databaseID=extras.getString("datalink");
+        databaseID1=extras.getString("defence");
+
+
         imageView=(ImageView)findViewById(R.id.share);
 
          post_image=(KenBurnsView) findViewById(R.id.pic);
@@ -98,7 +96,7 @@ public class Recycler_View_Click extends AppCompatActivity implements View.OnCli
 
 
         mAdView = (AdView) findViewById(R.id.adView);
-        mDatabase = FirebaseDatabase.getInstance().getReference(databaseID);
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(databaseID1).child(databaseID);
         mDatabase.keepSynced(true);
         mRecyclerView=(RecyclerView)findViewById(R.id.rec_click);
         mRecyclerView.hasFixedSize();
@@ -242,8 +240,6 @@ public class Recycler_View_Click extends AppCompatActivity implements View.OnCli
     public void onStart() {
         super.onStart();
 
-
-
         FirebaseRecyclerAdapter<NewsDetail, Recycler_View_Click.MyViewHolder> firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<NewsDetail, Recycler_View_Click.MyViewHolder>
                 (NewsDetail.class ,grid_youtube_3, Recycler_View_Click.MyViewHolder.class,mDatabase) {
 
@@ -273,6 +269,7 @@ public class Recycler_View_Click extends AppCompatActivity implements View.OnCli
                         imgFullScrn.putExtra("date",date);
                         imgFullScrn.putExtra("image",image);
                         imgFullScrn.putExtra("datalink",databaseID);
+                        imgFullScrn.putExtra("defence",databaseID1);
 
 
                         startActivity(imgFullScrn);

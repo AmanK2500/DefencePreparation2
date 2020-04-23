@@ -82,12 +82,14 @@ public class All_User_List extends Fragment {
                 viewHolder.setStatus(model.getStatus());
                 viewHolder.setImage(getActivity().getApplicationContext(), model.getImage());
 
+
+
                 final String user_id = getRef(position).getKey();
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent profileIntent = new Intent(getActivity(), My_Profile_setting.class);
+                        Intent profileIntent = new Intent(getActivity(), View_other_user_Profile    .class);
                         profileIntent.putExtra("user_id", user_id);
                         startActivity(profileIntent);
 

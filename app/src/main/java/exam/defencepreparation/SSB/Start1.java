@@ -1,5 +1,6 @@
 package exam.defencepreparation.SSB;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Collections;
 
 import androidx.appcompat.app.AppCompatActivity;
+import dmax.dialog.SpotsDialog;
 import exam.defencepreparation.Quiz.Common.Common;
 import exam.defencepreparation.Quiz.Model.Question;
 import exam.defencepreparation.R;
@@ -29,11 +31,14 @@ public class Start1 extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference questions;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        dialog = new SpotsDialog(this);
+        dialog.show();
 
         database = FirebaseDatabase.getInstance();
         questions = database.getReference("Questions");
@@ -124,7 +129,9 @@ public class Start1 extends AppCompatActivity {
                             Common.questionList.add(ques);
                             Collections.shuffle(Common.questionList);
                         }
+                        dialog.dismiss();
                     }
+
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {

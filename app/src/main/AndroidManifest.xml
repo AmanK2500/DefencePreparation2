@@ -15,10 +15,12 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
-        <activity android:name=".SSB.read_story"></activity>
+        <activity android:name=".Login_SetUp.View_other_user_Profile"></activity>
+        <activity android:name=".SSB.Read_Full_Story" />
+        <activity android:name=".SSB.read_story" />
         <activity android:name=".SSB.ppdt_story" />
         <activity android:name=".Login_SetUp.Reset_Password" />
-        <activity android:name=".Login_SetUp.Login_activity"/>
+        <activity android:name=".Login_SetUp.Login_activity" />
         <activity android:name=".Login_SetUp.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

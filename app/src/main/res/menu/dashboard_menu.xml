@@ -23,7 +23,7 @@
 
 </group>
 
-    <group android:id="@+id/group_settings_id">
+    <group android:checkableBehavior="single">
         <item android:title="Connect with Us!"/>
         <item
             android:id="@+id/AboutUs"

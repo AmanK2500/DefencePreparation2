@@ -14,7 +14,7 @@
     >
     <RelativeLayout
         android:background="#fff"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         >
         <ImageView
@@ -24,25 +24,16 @@
             android:scaleType="centerCrop"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/loadingpic"
+            android:background="@drawable/defencelogocrop"
             />
 
-        <Button
-            android:layout_below="@+id/new_pic"
-            android:id="@+id/read"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="read story"></Button>
-        <Button
-            android:layout_below="@+id/new_pic"
-            android:id="@+id/write"
-            android:layout_marginStart="150dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="read story"></Button>
+        <ImageView
+            android:layout_marginLeft="300dp"
+            android:layout_marginTop="250dp"
+            android:id="@+id/reg_create_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/circle_arrow" />
 
 
     </RelativeLayout>
