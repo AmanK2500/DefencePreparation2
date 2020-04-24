@@ -1,12 +1,15 @@
 package exam.defencepreparation.SSB;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -15,28 +18,33 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import dmax.dialog.SpotsDialog;
 import exam.defencepreparation.Quiz.Common.Common;
 import exam.defencepreparation.Quiz.Interface.ItemClickListener;
 import exam.defencepreparation.Quiz.Model.Category;
-import exam.defencepreparation.Quiz.Start;
 import exam.defencepreparation.Quiz.ViewHolder.CategoryViewHolder;
 import exam.defencepreparation.R;
+import exam.defencepreparation.Recycler_View_Click;
+import exam.defencepreparation.news.NewsDetail;
+import static exam.defencepreparation.R.layout.interface_news;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class WAT extends Fragment {
+
+
+public class SRT extends Fragment {
     AdView mAdView;
     View myFragment;
     RecyclerView listCategory;
-    FirebaseRecyclerAdapter<Category,CategoryViewHolder> adapter;
+    FirebaseRecyclerAdapter<Category, CategoryViewHolder> adapter;
     FirebaseDatabase database;
     DatabaseReference categories;
     public static WAT newInstance(){
@@ -48,7 +56,7 @@ public class WAT extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
-        categories = database.getReference("WAT");
+        categories = database.getReference("SRT1");
     }
 
     @Nullable
@@ -143,7 +151,7 @@ public class WAT extends Fragment {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
 
-                        Intent startGame = new Intent(getActivity(), exam.defencepreparation.SSB.Start.class);
+                        Intent startGame = new Intent(getActivity(),Start1.class);
                         Common.categoryId = adapter.getRef(position).getKey();
                         Common.categoryName = model.getName();
                         startActivity(startGame);
